@@ -233,6 +233,25 @@ function parseCsv(text) {
   return rows.map(r => Object.fromEntries(head.map((h, i) => [h, r[i]])));
 }
 
+export function anonymise(data, story = null) {
+  const names = new Map(data.players.map((p, i) => [p.h, `Player ${i + 1}`]));
+  const quiet = new Set(['chat', 'note'].map(t => data.types.indexOf(t)));
+  const ins = data.insights;
+  const out = {
+    ...data,
+    players: data.players.map(p => ({ ...p, h: names.get(p.h) })),
+    events: data.events.filter(e => !quiet.has(e[2])),
+    insights: { ...ins, top_handles: ins.top_handles.map(h => names.get(h) ?? h), cheat_detail: ins.cheat_detail.map(c => ({ ...c, handle: names.get(c.handle) ?? c.handle })) },
+  };
+  const swap = s => [...names].sort((a, b) => b[0].length - a[0].length).reduce((t, [h, n]) => t.replaceAll(h, n), s);
+  const unquote = s => {
+    const st = JSON.parse(s);
+    for (const sc of st.scenes ?? []) if (sc.callout?.items?.some(i => 'quote' in i)) delete sc.callout;
+    return JSON.stringify(st);
+  };
+  return { data: out, story: story && unquote(swap(story)) };
+}
+
 export function html(data, story = null) {
   const tpl = readFileSync(join(HERE, 'viewer', 'index.html'), 'utf8');
   const css = readFileSync(join(HERE, 'viewer', 'style.css'), 'utf8');
@@ -256,15 +275,19 @@ if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1]
   const outDir = resolve(flag('--out', 'out'));
   const title = flag('--title', null);
   const storyFile = flag('--story', null);
+  const anon = args.includes('--anon');
+  if (anon) args.splice(args.indexOf('--anon'), 1);
   const src = args[0];
   if (!src || args.includes('--help')) {
-    console.log('Usage: node render.mjs <maze-sync-folder> [--out out] [--title "ROE practice"] [--story demo/storyboard.json]');
+    console.log('Usage: node render.mjs <maze-sync-folder> [--out out] [--title "ROE practice"] [--story demo/storyboard.json] [--anon]');
     console.log('The folder is one world from `npm run maze:sync` (events.jsonl, layout.json, config.json, players.csv).');
     process.exit(src ? 0 : 1);
   }
-  const data = build(resolve(src), { title });
+  const raw = build(resolve(src), { title });
+  const story0 = storyFile ? readFileSync(resolve(storyFile), 'utf8') : null;
+  const { data, story } = anon ? anonymise(raw, story0) : { data: raw, story: story0 };
   mkdirSync(outDir, { recursive: true });
-  writeFileSync(join(outDir, 'index.html'), html(data, storyFile ? readFileSync(resolve(storyFile), 'utf8') : null));
+  writeFileSync(join(outDir, 'index.html'), html(data, story));
   writeFileSync(join(outDir, 'insights.json'), JSON.stringify(data.insights, null, 2));
   const kb = n => `${Math.round(n / 1024)} KB`;
   console.log(`${data.world}: ${data.counts.events} events, ${data.counts.players} players, ${(data.span / 3600000).toFixed(1)} h`);

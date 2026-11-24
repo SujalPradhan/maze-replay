@@ -2,9 +2,16 @@
 
 Turns an ROE Maze log into an interactive replay with findings. One command, one self-contained HTML page, no server.
 
+Live replay (anonymised): https://sujalpradhan.github.io/maze-replay/ (add `?demo` for the guided tour)
+
 ![Demo frame](demo/maze-replay-demo.jpg)
 
-Demo video (118 s, voiceover and captions): [demo/maze-replay-demo.mp4](demo/maze-replay-demo.mp4)
+Videos:
+
+- [demo/maze-replay-demo.mp4](demo/maze-replay-demo.mp4): the replay itself, 118 s, voiceover and captions
+- [demo/maze-vault-vox.mp4](demo/maze-vault-vox.mp4): the vault door story as a paper-map explainer, 31 s
+
+![Vault explainer frame](demo/maze-vault-vox.jpg)
 
 ## What the 23 Nov practice log shows
 
@@ -36,9 +43,11 @@ In the page:
 
 ## Privacy
 
-The page uses handles (`icy-seal-42`), never emails. Chat and note text is scrubbed of emails, roll numbers, IP addresses, long numbers and signed tokens (one student pasted a result token into a note). `npm run check` fails if any of those reach the page, and proves it would catch them by planting one of each.
+The full page uses game handles (like `calm-otter-07`), never emails. Chat and note text is scrubbed of emails, roll numbers, IP addresses, long numbers and signed tokens (one student pasted a result token into a note). `npm run check` fails if any of those reach the page, and proves it would catch them by planting one of each.
 
-Keep `data/` and `out/` out of git. Share a built page only with staff.
+Keep `data/` and `out/` out of git. Share a full build only with staff.
+
+`--anon` makes a page safe to publish: players become `Player 1` to `Player 92`, chat and notes are dropped, and storyboard quotes are removed. `npm run site` writes that build to `docs/`, which GitHub Pages serves. `npm run check` fails if a handle or a line of chat reaches it.
 
 ## Check
 
@@ -62,10 +71,25 @@ npm run demo             # record with Playwright, mix with ffmpeg
 
 `demo/record.mjs` screencasts the page, reads the cue times the page reports, and places each voiceover line and sound effect at its cue. Scene length comes from the voiceover length, so the picture and voice stay in sync without hand timing. Change a line in the storyboard, re-run `demo:voice` and `demo`.
 
+## Paper-map explainer
+
+`demo/vox/` renders the vault door story in a collage map style: the maze is engraved like a sea chart, the camera flies across it, and halftone cut-outs, marker ink, tags and ransom letters land on the beats of the voiceover. Every number comes from the log.
+
+```sh
+python3 -m venv ~/.cache/maze-video/venv && ~/.cache/maze-video/venv/bin/pip install numpy opencv-python-headless pillow soundfile
+~/.cache/kokoro/venv/bin/python demo/vox/voice.py         # voiceover and word timings from demo/vox/script.json
+~/.cache/maze-video/venv/bin/python demo/vox/render.py --sheet   # 12-frame contact sheet
+~/.cache/maze-video/venv/bin/python demo/vox/render.py           # demo/maze-vault-vox.mp4
+```
+
+Fonts (Libre Caslon Text, Permanent Marker, Special Elite, Anton) are read from `~/.cache/maze-video/fonts`, downloaded from google/fonts. Sound effects are synthesised in the script.
+
 ## Layout
 
 - `render.mjs`: reads a sync folder, computes positions, events and insights, writes the page
 - `viewer/`: page template, styles and replay code (plain JS, canvas)
-- `demo/`: storyboard, voiceover and sound scripts, recorder, the rendered video
+- `demo/`: storyboard, voiceover and sound scripts, recorder, the rendered videos
+- `demo/vox/`: script and renderer for the paper-map explainer
+- `docs/`: the anonymised page served by GitHub Pages
 - `test/check.mjs`: data and privacy checks
 - `PROMPT.md`: a prompt for running this on new logs with a coding agent

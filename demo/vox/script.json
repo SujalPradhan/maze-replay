@@ -1,0 +1,16 @@
+{
+  "voice": "af_heart",
+  "speed": 1.0,
+  "gap_s": 0.32,
+  "beats": [
+    { "id": "home", "vo": "Ninety-two students started in one atrium." },
+    { "id": "far", "vo": "The top five scores all came through one door, fifty-three steps away." },
+    { "id": "pads", "vo": "It opened only when three students stood on three red pads, and pushed together." },
+    { "id": "tried", "vo": "Forty-six students tried." },
+    { "id": "opens", "vo": "In nineteen hours, it opened four times." },
+    { "id": "outside", "vo": "The room outside is where players spent the most time." },
+    { "id": "chat", "vo": "And the chat there says: we need one more person." },
+    { "id": "through", "vo": "Ten got through, and every one of them scored twenty-four or more." },
+    { "id": "payoff", "vo": "To reach the top, you needed two other people, at the same time." }
+  ]
+}

@@ -6,6 +6,7 @@
   "description": "Turn ROE Maze logs into an interactive replay with findings",
   "scripts": {
     "build": "node render.mjs data/practice-sandbox --out out --title \"ROE practice, 23 Nov 2026\" --story demo/storyboard.json",
+    "site": "node render.mjs data/practice-sandbox --out docs --title \"ROE practice, 23 Nov 2026\" --story demo/storyboard.json --anon",
     "check": "node test/check.mjs",
     "demo:voice": "~/.cache/kokoro/venv/bin/python demo/tts.py",
     "demo:sfx": "python3 demo/sfx.py",
