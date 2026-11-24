@@ -1,0 +1,17 @@
+{
+  "name": "maze-replay",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Turn ROE Maze logs into an interactive replay with findings",
+  "scripts": {
+    "build": "node render.mjs data/practice-sandbox --out out --title \"ROE practice, 23 Nov 2026\" --story demo/storyboard.json",
+    "check": "node test/check.mjs",
+    "demo:voice": "~/.cache/kokoro/venv/bin/python demo/tts.py",
+    "demo:sfx": "python3 demo/sfx.py",
+    "demo": "node demo/record.mjs"
+  },
+  "devDependencies": {
+    "playwright": "1.64.1"
+  }
+}

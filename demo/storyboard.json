@@ -1,0 +1,299 @@
+{
+  "lead_ms": 700,
+  "tail_ms": 900,
+  "scenes": [
+    {
+      "id": "intro",
+      "theme": "dark",
+      "mode": "together",
+      "t": 0,
+      "speed": 20,
+      "cam": "fit",
+      "playing": true,
+      "layers": {
+        "trails": true,
+        "heat": false,
+        "labels": true
+      },
+      "card": {
+        "eyebrow": "ROE practice maze · 23 November 2026",
+        "title": "92 students. Every step logged.",
+        "sub": "This is that log, replayed."
+      },
+      "sfx": "whoosh",
+      "vo": "Ninety-two students played the ROE practice maze on the twenty-third of November. Every step they took was logged. This is that log, replayed.",
+      "min": 6
+    },
+    {
+      "id": "together",
+      "cam": "fit",
+      "speed": 30,
+      "vo": "Here, everyone starts at the same moment, so all ninety-two runs play side by side. Each dot is one student, coloured by their final score.",
+      "callout": {
+        "title": "How to read it",
+        "items": [
+          {
+            "n": "●",
+            "text": "One student. Darker blue means a higher final score"
+          },
+          {
+            "n": "○",
+            "text": "A green ring is a task solved, red is a wrong answer"
+          },
+          {
+            "n": "✕",
+            "text": "Orange marks are traps"
+          }
+        ]
+      },
+      "sfx": "pop"
+    },
+    {
+      "id": "first",
+      "cam": [
+        38,
+        30,
+        1.9
+      ],
+      "cam_ms": 2200,
+      "speed": 30,
+      "vo": "In the first five minutes, most head straight for the three-mark tasks near the start: the router terminal and the help desks.",
+      "callout": {
+        "title": "First task solved",
+        "items": [
+          {
+            "n": "21",
+            "text": "Router terminal"
+          },
+          {
+            "n": "14",
+            "text": "Help desk A"
+          },
+          {
+            "n": "11",
+            "text": "Rack label"
+          }
+        ]
+      }
+    },
+    {
+      "id": "follow",
+      "t": 0,
+      "speed": 165,
+      "follow": "icy-seal-42",
+      "cam": [
+        37,
+        37,
+        3
+      ],
+      "cam_ms": 1400,
+      "vo": "Follow one of the top scorers. icy-seal-42 solves all twelve tasks, including both locked rooms, in twenty-seven minutes, with one wrong answer.",
+      "callout": {
+        "title": "icy-seal-42",
+        "items": [
+          {
+            "n": "12",
+            "text": "tasks solved, every one that could be marked"
+          },
+          {
+            "n": "27",
+            "text": "minutes from start to the last task"
+          },
+          {
+            "n": "27",
+            "text": "marks, the top score"
+          }
+        ]
+      },
+      "sfx": "whoosh",
+      "min": 9
+    },
+    {
+      "id": "traps",
+      "follow": null,
+      "t": 300000,
+      "speed": 30,
+      "cam": [
+        21,
+        13,
+        3.2
+      ],
+      "cam_ms": 1800,
+      "vo": "Traps slow everyone down. One meeting trap in Open Office A4 caught players seventy-two times. Some players left notes on the floor to warn the next person.",
+      "callout": {
+        "title": "A note left two tiles away",
+        "items": [
+          {
+            "quote": "do NOT go 2 steps from here in north direction. there's trap"
+          }
+        ]
+      }
+    },
+    {
+      "id": "scores",
+      "cam": [
+        47,
+        27,
+        0.86
+      ],
+      "speed": 60,
+      "panel": "findings",
+      "finding": "scores",
+      "vo": "By the end, the class splits in two. Twenty-one students scored nothing: five never moved, and nine left within ten minutes. Most of the rest landed between eighteen and twenty-five.",
+      "sfx": "pop"
+    },
+    {
+      "id": "door",
+      "mode": "real",
+      "t": 6903053,
+      "speed": 8,
+      "cam": [
+        9,
+        49,
+        3.6
+      ],
+      "cam_ms": 2000,
+      "layers": {
+        "heat": false
+      },
+      "panel": null,
+      "vo": "The top of the board comes down to one door. The vault opens only when three students stand on three red pads, and push together.",
+      "sfx": "whoosh",
+      "min": 8
+    },
+    {
+      "id": "opened",
+      "speed": 12,
+      "vo": "Forty-six students pressed those pads. In nineteen hours, the door opened four times. Only ten students ever solved the task inside.",
+      "callout": {
+        "title": "The vault door",
+        "items": [
+          {
+            "n": "46",
+            "text": "students pressed a pad"
+          },
+          {
+            "n": "4",
+            "text": "times the door opened"
+          },
+          {
+            "n": "10",
+            "text": "solved the vault task"
+          }
+        ]
+      },
+      "sfx": "ding"
+    },
+    {
+      "id": "waiting",
+      "mode": "together",
+      "t": 1500000,
+      "speed": 30,
+      "cam": [
+        11,
+        44,
+        2.1
+      ],
+      "cam_ms": 1800,
+      "layers": {
+        "heat": true
+      },
+      "vo": "Open Office B7, right outside the door, is where students spent the most time. The chat there is mostly one message, again and again.",
+      "callout": {
+        "title": "Chat at the vault door",
+        "items": [
+          {
+            "quote": "anyone here?"
+          },
+          {
+            "quote": "push the door we need 1 more person"
+          },
+          {
+            "quote": "3rd person push the door"
+          }
+        ]
+      }
+    },
+    {
+      "id": "when",
+      "layers": {
+        "heat": false
+      },
+      "cam": [
+        47,
+        27,
+        0.86
+      ],
+      "panel": "findings",
+      "finding": "when",
+      "vo": "Part of the reason may be timing. The world stayed open for nineteen hours, and no more than sixteen students were ever online at the same moment.",
+      "sfx": "pop"
+    },
+    {
+      "id": "result",
+      "panel": "findings",
+      "finding": "team-door",
+      "vo": "Every student who got through the door scored twenty-four or more. All five top scores of twenty-seven came through it.",
+      "callout": {
+        "title": "Through the vault door",
+        "items": [
+          {
+            "n": "10/10",
+            "text": "scored 24 or more"
+          },
+          {
+            "n": "5/5",
+            "text": "top scores of 27"
+          }
+        ]
+      },
+      "sfx": "ding",
+      "cam": [
+        47,
+        27,
+        0.86
+      ]
+    },
+    {
+      "id": "tool",
+      "panel": "findings",
+      "finding": "team-door",
+      "mode": "together",
+      "t": 900000,
+      "speed": 30,
+      "cam": [
+        47,
+        27,
+        0.86
+      ],
+      "at": [
+        [
+          3.2,
+          {
+            "finding": "tasks"
+          }
+        ],
+        [
+          6.2,
+          {
+            "finding": "traps"
+          }
+        ]
+      ],
+      "vo": "All of this comes from one script. Point it at any synced maze log and it builds this page: the replay, the heatmap and these findings, with handles in place of emails.",
+      "min": 9
+    },
+    {
+      "id": "end",
+      "panel": null,
+      "card": {
+        "eyebrow": "Next",
+        "title": "Tonight's practice game",
+        "sub": "Same script, new log. Does the pattern hold?"
+      },
+      "vo": "Next, we run it on tonight's practice game, and see if the pattern holds.",
+      "sfx": "whoosh",
+      "min": 4.5
+    }
+  ]
+}

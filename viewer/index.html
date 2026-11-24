@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Maze Replay</title>
+<meta name="description" content="Replay and findings for {{TITLE}}">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Crect width='16' height='16' rx='3' fill='%232a78d6'/%3E%3Cpath d='M3 3h10v3H6v2h7v5H3v-3h7V9H3z' fill='%23fff'/%3E%3C/svg%3E">
+<style>/*STYLE*/</style>
+</head>
+<body>
+<header class="top">
+  <div class="brand">
+    <span class="logo" aria-hidden="true"></span>
+    <div>
+      <h1>Maze replay</h1>
+      <p class="world" id="world"></p>
+    </div>
+  </div>
+  <p class="headline" id="headline"></p>
+  <button type="button" class="icon-btn" id="theme" aria-label="Switch colour theme" title="Switch colour theme">
+    <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 3a7 7 0 1 0 7 7 5.5 5.5 0 0 1-7-7z" fill="currentColor"/></svg>
+  </button>
+</header>
+
+<main class="layout">
+  <section class="stage" id="stage" aria-label="Replay map">
+    <canvas id="map"></canvas>
+    <div class="hud">
+      <div class="clock" id="clock" aria-live="off"></div>
+      <div class="legend" id="legend"></div>
+    </div>
+    <div class="tools" role="group" aria-label="Map layers">
+      <button type="button" class="chip on" data-layer="trails" aria-pressed="true">Trails</button>
+      <button type="button" class="chip" data-layer="heat" aria-pressed="false">Heatmap</button>
+      <button type="button" class="chip on" data-layer="labels" aria-pressed="true">Rooms</button>
+      <button type="button" class="chip" id="fit" title="Show the whole map">Fit</button>
+    </div>
+    <div class="follow-chip" id="followChip" hidden>
+      <span class="sw" id="followSw"></span><span id="followName"></span>
+      <button type="button" id="unfollow" aria-label="Stop following">×</button>
+    </div>
+    <div class="card" id="card" hidden></div>
+    <div class="callout" id="callout" hidden></div>
+    <div class="caption" id="caption" hidden></div>
+  </section>
+
+  <aside class="panel" id="panel">
+    <div class="tabs" role="tablist">
+      <button role="tab" type="button" data-tab="findings" aria-selected="true">Findings</button>
+      <button role="tab" type="button" data-tab="feed" aria-selected="false">Live feed</button>
+      <button role="tab" type="button" data-tab="players" aria-selected="false">Players</button>
+    </div>
+    <div class="tab-body" id="tab-findings" role="tabpanel"></div>
+    <div class="tab-body" id="tab-feed" role="tabpanel" hidden>
+      <p class="hint" id="feedHint"></p>
+      <ol class="feed" id="feed"></ol>
+    </div>
+    <div class="tab-body" id="tab-players" role="tabpanel" hidden>
+      <input type="search" id="search" placeholder="Find a handle" aria-label="Find a player by handle">
+      <ol class="board" id="board"></ol>
+    </div>
+  </aside>
+</main>
+
+<footer class="transport">
+  <button type="button" class="play" id="play" aria-label="Pause">
+    <svg viewBox="0 0 20 20" aria-hidden="true"><path id="playIcon" d="M6 4h3v12H6zM11 4h3v12h-3z" fill="currentColor"/></svg>
+  </button>
+  <div class="seg" role="radiogroup" aria-label="Time mode">
+    <button type="button" role="radio" data-mode="together" aria-checked="true" title="Everyone starts at minute 0, so all runs play side by side">Everyone together</button>
+    <button type="button" role="radio" data-mode="real" aria-checked="false" title="The real clock, so you see who was online at the same time">As it happened</button>
+  </div>
+  <label class="speed">Speed
+    <select id="speed"></select>
+  </label>
+  <div class="scrub">
+    <canvas id="spark"></canvas>
+    <div class="playhead" id="playhead"></div>
+    <input type="range" id="scrub" min="0" max="1000" step="1" value="0" aria-label="Replay time">
+  </div>
+  <span class="time" id="time"></span>
+</footer>
+<div class="tip" id="tip" hidden></div>
+
+<script>/*DATA*/</script>
+<script>/*APP*/</script>
+</body>
+</html>
