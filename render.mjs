@@ -233,8 +233,8 @@ function parseCsv(text) {
   return rows.map(r => Object.fromEntries(head.map((h, i) => [h, r[i]])));
 }
 
-export function anonymise(data, story = null) {
-  const names = new Map(data.players.map((p, i) => [p.h, `Player ${i + 1}`]));
+export function anonymise(data, story = null, { handles = false } = {}) {
+  const names = new Map(data.players.map((p, i) => [p.h, handles ? p.h : `Player ${i + 1}`]));
   const quiet = new Set(['chat', 'note'].map(t => data.types.indexOf(t)));
   const ins = data.insights;
   const out = {
@@ -275,17 +275,18 @@ if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1]
   const outDir = resolve(flag('--out', 'out'));
   const title = flag('--title', null);
   const storyFile = flag('--story', null);
-  const anon = args.includes('--anon');
-  if (anon) args.splice(args.indexOf('--anon'), 1);
+  const bool = name => { const i = args.indexOf(name); if (i >= 0) args.splice(i, 1); return i >= 0; };
+  const anon = bool('--anon');
+  const keepHandles = bool('--keep-handles');
   const src = args[0];
   if (!src || args.includes('--help')) {
-    console.log('Usage: node render.mjs <maze-sync-folder> [--out out] [--title "ROE practice"] [--story demo/storyboard.json] [--anon]');
+    console.log('Usage: node render.mjs <maze-sync-folder> [--out out] [--title "ROE practice"] [--story demo/storyboard.json] [--anon [--keep-handles]]');
     console.log('The folder is one world from `npm run maze:sync` (events.jsonl, layout.json, config.json, players.csv).');
     process.exit(src ? 0 : 1);
   }
   const raw = build(resolve(src), { title });
   const story0 = storyFile ? readFileSync(resolve(storyFile), 'utf8') : null;
-  const { data, story } = anon ? anonymise(raw, story0) : { data: raw, story: story0 };
+  const { data, story } = anon ? anonymise(raw, story0, { handles: keepHandles }) : { data: raw, story: story0 };
   mkdirSync(outDir, { recursive: true });
   writeFileSync(join(outDir, 'index.html'), html(data, story));
   writeFileSync(join(outDir, 'insights.json'), JSON.stringify(data.insights, null, 2));

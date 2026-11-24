@@ -69,6 +69,10 @@ for (const rel of dirs) {
   ok(al.length === 0 && leaks(anonPage, subs).length === 0, `anonymised page has no handles, chat or note text (${al.length} found${al.length ? `: ${al.slice(0, 3).join(' | ')}` : ''})`);
   const plantedAnon = anonLeaks(`${anonPage}${handles[0]}${JSON.stringify(texts[0] ?? '')}`);
   ok(plantedAnon.length >= (texts.length ? 2 : 1), `anonymised check catches a planted handle and note (${plantedAnon.length} found)`);
+  const site = anonymise(data, story, { handles: true });
+  const sitePage = html(site.data, site.story);
+  const sl = texts.filter(t => sitePage.includes(JSON.stringify(t).slice(1, -1)));
+  ok(sl.length === 0 && leaks(sitePage, subs).length === 0 && site.data.players.every((p, i) => p.h === data.players[i].h), `site page keeps handles and has no chat or note text (${sl.length} found)`);
 }
 console.log(failed ? `\n${failed} check(s) failed` : '\nAll checks passed');
 process.exit(failed ? 1 : 0);

@@ -2,7 +2,7 @@
 
 Turns an ROE Maze log into an interactive replay with findings. One command, one self-contained HTML page, no server.
 
-Live replay (anonymised): https://sujalpradhan.github.io/maze-replay/ (add `?demo` for the guided tour)
+Live replay: https://sujalpradhan.github.io/maze-replay/ (add `?demo` for the guided tour)
 
 Videos: https://sujalpradhan.github.io/maze-replay/videos.html
 
@@ -45,7 +45,7 @@ The full page uses game handles (like `calm-otter-07`), never emails. Chat and n
 
 Keep `data/` and `out/` out of git. Share a full build only with staff.
 
-`--anon` makes a page safe to publish: players become `Player 1` to `Player 92`, chat and notes are dropped, and storyboard quotes are removed. `npm run site` writes that build to `docs/`, which GitHub Pages serves. `npm run check` fails if a handle or a line of chat reaches it.
+`--anon` makes a page safe to publish: chat and notes are dropped, storyboard quotes are removed, and players become `Player 1` to `Player 92`. Add `--keep-handles` to keep game handles. `npm run site` writes the handles version to `docs/`, which GitHub Pages serves. `npm run check` fails if a line of chat reaches either version.
 
 ## Check
 
@@ -88,6 +88,6 @@ Fonts (Libre Caslon Text, Permanent Marker, Special Elite, Anton) are read from 
 - `viewer/`: page template, styles and replay code (plain JS, canvas)
 - `demo/`: storyboard, voiceover and sound scripts, recorder, the rendered videos
 - `demo/vox/`: script and renderer for the paper-map explainer
-- `docs/`: what GitHub Pages serves: the anonymised page, `videos.html` and `media/`
+- `docs/`: what GitHub Pages serves: the public page, `videos.html` and `media/`
 - `test/check.mjs`: data and privacy checks
 - `PROMPT.md`: a prompt for running this on new logs with a coding agent
