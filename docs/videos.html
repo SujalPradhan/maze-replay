@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Maze Replay Videos</title>
+<style>
+  :root { --bg: #f7f6f2; --card: #ffffff; --ink: #1d1c20; --muted: #5d5b63; --line: #e3e0d8; --accent: #1f6feb; }
+  @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --bg: #141417; --card: #1d1d22; --ink: #ecebef; --muted: #a3a1aa; --line: #2c2c33; --accent: #6ea8ff; } }
+  :root[data-theme="dark"] { --bg: #141417; --card: #1d1d22; --ink: #ecebef; --muted: #a3a1aa; --line: #2c2c33; --accent: #6ea8ff; }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--ink); font: 16px/1.5 system-ui, -apple-system, "Segoe UI", sans-serif; }
+  main { max-width: 1040px; margin: 0 auto; padding: 40px 16px 64px; }
+  h1 { font-size: 28px; margin: 0 0 6px; }
+  .lead { color: var(--muted); margin: 0 0 32px; }
+  a { color: var(--accent); }
+  section { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 20px; margin-bottom: 28px; }
+  h2 { font-size: 20px; margin: 0 0 4px; }
+  .meta { color: var(--muted); font-size: 14px; margin: 0 0 14px; }
+  video { width: 100%; aspect-ratio: 16 / 9; border-radius: 8px; background: #000; display: block; }
+  p.note { margin: 12px 0 0; color: var(--muted); font-size: 14px; }
+</style>
+</head>
+<body>
+<main>
+  <h1>Maze replay videos</h1>
+  <p class="lead">Both made from the ROE practice maze log of 23 Nov 2026. Every number is computed from the log. <a href="./">Open the interactive replay</a></p>
+
+  <section>
+    <h2>The vault door</h2>
+    <p class="meta">36 s · paper-map explainer · voiceover and sound</p>
+    <video controls preload="metadata" playsinline poster="media/maze-vault-vox.jpg" src="media/maze-vault-vox.mp4"></video>
+    <p class="note">The maze drawn as an engraved map. The top scores all came through one 3-person door that opened four times in 19 hours.</p>
+  </section>
+
+  <section>
+    <h2>The replay, guided</h2>
+    <p class="meta">118 s · screen recording of the replay · voiceover and captions</p>
+    <video controls preload="metadata" playsinline poster="media/maze-replay-demo.jpg" src="media/maze-replay-demo.mp4"></video>
+    <p class="note">A tour of the interactive replay: everyone together, one top scorer followed, the vault door, and the findings panel.</p>
+  </section>
+</main>
+</body>
+</html>

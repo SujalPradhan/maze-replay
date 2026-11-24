@@ -9,7 +9,7 @@ const HERE = dirname(fileURLToPath(import.meta.url));
 const VO = join(HERE, 'vo');
 const SFX = join(HERE, 'sfx');
 const PAGE = resolve(process.env.PAGE ?? join(HERE, '..', 'out', 'index.html'));
-const OUT = resolve(process.argv[2] ?? join(HERE, 'maze-replay-demo.mp4'));
+const OUT = resolve(process.argv[2] ?? join(HERE, '..', 'docs', 'media', 'maze-replay-demo.mp4'));
 const FRAMES = join(process.env.TMPDIR ?? '/tmp', `maze-replay-frames-${Date.now()}`);
 const SFX_GAIN = Number(process.env.SFX_GAIN ?? 0.35);
 

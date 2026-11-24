@@ -4,14 +4,12 @@ Turns an ROE Maze log into an interactive replay with findings. One command, one
 
 Live replay (anonymised): https://sujalpradhan.github.io/maze-replay/ (add `?demo` for the guided tour)
 
-![Demo frame](demo/maze-replay-demo.jpg)
+Videos: https://sujalpradhan.github.io/maze-replay/videos.html
 
-Videos:
+- [docs/media/maze-vault-vox.mp4](docs/media/maze-vault-vox.mp4): the vault door story as a paper-map explainer, 36 s
+- [docs/media/maze-replay-demo.mp4](docs/media/maze-replay-demo.mp4): the replay itself, 118 s, voiceover and captions
 
-- [demo/maze-replay-demo.mp4](demo/maze-replay-demo.mp4): the replay itself, 118 s, voiceover and captions
-- [demo/maze-vault-vox.mp4](demo/maze-vault-vox.mp4): the vault door story as a paper-map explainer, 31 s
-
-![Vault explainer frame](demo/maze-vault-vox.jpg)
+![Vault explainer frame](docs/media/maze-vault-vox.jpg)
 
 ## What the 23 Nov practice log shows
 
@@ -79,7 +77,7 @@ npm run demo             # record with Playwright, mix with ffmpeg
 python3 -m venv ~/.cache/maze-video/venv && ~/.cache/maze-video/venv/bin/pip install numpy opencv-python-headless pillow soundfile
 ~/.cache/kokoro/venv/bin/python demo/vox/voice.py         # voiceover and word timings from demo/vox/script.json
 ~/.cache/maze-video/venv/bin/python demo/vox/render.py --sheet   # 12-frame contact sheet
-~/.cache/maze-video/venv/bin/python demo/vox/render.py           # demo/maze-vault-vox.mp4
+~/.cache/maze-video/venv/bin/python demo/vox/render.py           # docs/media/maze-vault-vox.mp4
 ```
 
 Fonts (Libre Caslon Text, Permanent Marker, Special Elite, Anton) are read from `~/.cache/maze-video/fonts`, downloaded from google/fonts. Sound effects are synthesised in the script.
@@ -90,6 +88,6 @@ Fonts (Libre Caslon Text, Permanent Marker, Special Elite, Anton) are read from 
 - `viewer/`: page template, styles and replay code (plain JS, canvas)
 - `demo/`: storyboard, voiceover and sound scripts, recorder, the rendered videos
 - `demo/vox/`: script and renderer for the paper-map explainer
-- `docs/`: the anonymised page served by GitHub Pages
+- `docs/`: what GitHub Pages serves: the anonymised page, `videos.html` and `media/`
 - `test/check.mjs`: data and privacy checks
 - `PROMPT.md`: a prompt for running this on new logs with a coding agent

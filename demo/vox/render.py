@@ -582,7 +582,7 @@ def timeline():
 
     order = [b["id"] for b in T["beats"]]
     next_beat = {a: b for a, b in zip(order, order[1:])}
-    total = int(round((T["voice_end"] + 1.3) * FPS))
+    total = int(round((T["voice_end"] + 2.5) * FPS))
     sfx = []
     E = []
 
@@ -784,6 +784,13 @@ def timeline():
         piece(student(seed=k + 1), vroom, (-120 + k * 120, -90 - (k % 2) * 20), w("payoff", "other") + k * 4, total, rot=(-4, 1, 5)[k])
     ink(circle_pts(vroom, 220, 140, 21, off=(0, -90)), w("payoff", "same"), total, reveal=12, seed=21)
 
+    # 10 next
+    E.append(Note(w("next", "next") - 2, total, text="same maze, next game?", anchor=atrium, off=(0, -205), size=78, rot=-2.5))
+    for k in range(0, 16, 2):
+        sfx.append((w("next", "next") - 2 + k, "scratch"))
+    ink([(atrium, (-260, -140)), (atrium, (0, -130)), (atrium, (260, -146))], w("next", "pattern"), total, reveal=12, seed=31)
+    tag_at("source: roe practice log · 23 nov 2026", atrium, (0, -112), w("next", "holds"), total, rot=1.5)
+
     E.sort(key=lambda e: e.z)
     return E, Cam(moves + mv), total, sfx
 
@@ -925,8 +932,9 @@ if __name__ == "__main__":
     (BUILD / "segs.txt").write_text("".join(f"file '{s}'\n" for s in segs))
     subprocess.run(["ffmpeg", "-loglevel", "error", "-y", "-f", "concat", "-safe", "0", "-i", str(BUILD / "segs.txt"), "-c", "copy", str(BUILD / "silent.mp4")], check=True)
     mix(G["sfx"], total, BUILD / "mix.wav")
-    out = ROOT.parent / "maze-vault-vox.mp4"
+    out = ROOT.parent.parent / "docs" / "media" / "maze-vault-vox.mp4"
+    out.parent.mkdir(exist_ok=True)
     subprocess.run(["ffmpeg", "-loglevel", "error", "-y", "-i", str(BUILD / "silent.mp4"), "-i", str(BUILD / "mix.wav"), "-map", "0:v", "-map", "1:a",
                     "-c:v", "libx264", "-crf", "22", "-preset", "slow", "-pix_fmt", "yuv420p", "-c:a", "aac", "-b:a", "192k", "-shortest", "-movflags", "+faststart", str(out)], check=True)
-    subprocess.run(["ffmpeg", "-loglevel", "error", "-y", "-ss", "9", "-i", str(out), "-frames:v", "1", "-q:v", "3", str(out.with_suffix(".jpg"))], check=True)
+    subprocess.run(["ffmpeg", "-loglevel", "error", "-y", "-ss", "34.5", "-i", str(out), "-frames:v", "1", "-q:v", "3", str(out.with_suffix(".jpg"))], check=True)
     print("wrote", out, total, "frames")
